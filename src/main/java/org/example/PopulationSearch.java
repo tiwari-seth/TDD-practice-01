@@ -1,10 +1,16 @@
 package org.example;
 
+import org.example.exception_handler.exception;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class PopulationSearch {
     public int getPopulation(String city) {
+        if (city.isEmpty()) throw new NullPointerException("Input is null");
+        if(!getPopulationStatistic().containsKey(city)) {
+            throw new NullPointerException("City doesn't exist in record");
+        }
         return getPopulationStatistic().get(city);
     }
     private Map<String, Integer> getPopulationStatistic() {

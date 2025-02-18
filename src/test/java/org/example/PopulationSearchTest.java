@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exception_handler.exception;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +23,21 @@ public class PopulationSearchTest {
 
         int expectedPopulationCount=0;
 //        Assertions.assertEquals(expectedPopulationCount,count);
-        Assertions.assertThrows(NullPointerException.class,() -> {
+        NullPointerException exc = Assertions.assertThrows(NullPointerException.class, () -> {
             int count = ps.getPopulation(city);
         });
+        Assertions.assertEquals("Input is null",exc.getMessage());
+    }
+    @Test
+    public void findPopulationWithInvalidInput(){
+        String city = "XYZ";
+        PopulationSearch ps = new PopulationSearch();
+
+        int expectedPopulationCount=0;
+        NullPointerException exception = Assertions.assertThrows(NullPointerException.class, () -> {
+            int count = ps.getPopulation(city);
+        });
+        Assertions.assertEquals("City doesn't exist in record",exception.getMessage());
+
     }
 }
